@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ending</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ending.css" />
+</head>
+<body>
+
+<div class="tv-frame" id="tvFrame">
+    <video id="endVideo" autoplay muted playsinline>
+        <source src="assets/images/MP4.mp4" type="video/mp4">
+    </video>
+<div class="scanlines"></div>
+</div>
+
+<div class="caption" id="caption"></div>
+<div id="finalMessage"></div>
+<button id="retryBtn" onclick="location.href='index.html'">다시하기</button>
+
+<script>
+const video = document.getElementById('endVideo');
+const caption = document.getElementById('caption');
+const tvFrame = document.getElementById('tvFrame');
+const finalMessage = document.getElementById('finalMessage');
+const retryBtn = document.getElementById('retryBtn');
+
+const lines = [
+    "지금도 누군가는 빠져나오지 못하고 있습니다.",
+    "믿음을 가장한 고립, 그 끝은 파괴입니다."
+];
+
+let unlocked = false;
+
+window.addEventListener('click', () => {
+    if (!unlocked) {
+    video.muted = false;
+    video.play();
+    unlocked = true;
+    }
+});
+
+video.addEventListener('ended', () => {
+    caption.style.opacity = 1;
+    typeLine(0);
+});
+
+function typeLine(index) {
+    if (index >= lines.length) {
+    setTimeout(() => {
+        tvFrame.style.display = 'none';
+        caption.style.display = 'none';
+        showFinalMeaning();
+    }, 1000);
+    return;
+}
+    let i = 0;
+    let line = '';
+    const interval = setInterval(() => {
+    line += lines[index][i];
+    caption.textContent = line;
+    i++;
+    if (i >= lines[index].length) {
+        clearInterval(interval);
+        setTimeout(() => {
+        caption.textContent += '\n';
+        typeLine(index + 1);
+        }, 1000);
+    }
+    }, 60);
+}
+
+function showFinalMeaning() {
+  finalMessage.style.opacity = 1;
+  const fixedText = "창광";
+  const firstMeaning = "(窓光): 창문 밖의 빛";
+
+  finalMessage.innerHTML = `<span id="fixedPart">${fixedText}</span><span id="changingPart"></span>`;
+  const changingPart = document.getElementById("changingPart");
+
+  let i = 0;
+  const typingInterval = setInterval(() => {
+    changingPart.textContent += firstMeaning[i];
+    i++;
+    if (i >= firstMeaning.length) {
+      clearInterval(typingInterval);
+      setTimeout(() => eraseMeaning(firstMeaning), 1000);
+    }
+  }, 60);
+}
+
+function eraseMeaning(text) {
+  const changingPart = document.getElementById("changingPart");
+  let chars = text.split('');
+  let eraseIndex = chars.length - 1;
+
+  const eraseInterval = setInterval(() => {
+    chars[eraseIndex] = '';
+    changingPart.textContent = chars.join('');
+    eraseIndex--;
+    if (eraseIndex < 0) {
+      clearInterval(eraseInterval);
+      setTimeout(() => typeSecondMeaning("(猖狂): 미쳐 날뛰다"), 800);
+    }
+  }, 80);
+}
+
+function typeSecondMeaning(newText) {
+  const changingPart = document.getElementById("changingPart");
+  changingPart.textContent = "";
+  let i = 0;
+
+  const interval = setInterval(() => {
+    changingPart.textContent += newText[i];
+    i++;
+    if (i >= newText.length) {
+      clearInterval(interval);
+      setTimeout(() => {
+        retryBtn.style.display = 'inline-block';
+      }, 1500);
+    }
+  }, 60);
+}
+
+</script>
+</body>
+</html>
+
+

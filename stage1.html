@@ -1,133 +1,141 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>stage1</title>
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/MOONWrite.woff2" rel="stylesheet">
-  <link rel="stylesheet" href="stage1.css">
+<meta charset="UTF-8">
+<title>stage1</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/MOONWrite.woff2" rel="stylesheet">
+<link rel="stylesheet" href="stage1.css">
 </head>
 <body>
 
 
-  <div id="introOverlay">
+<div id="introOverlay">
   <div class="intro-text">第一章</div>
 </div>
 
 
 <div id="mainUI" style="display: none;">
   <div class="container" id="gameContainer">
-    <h1>사이비 타자 수행</h1>
-    <div class="word" id="wordDisplay">타자연습</div>
-    <input type="text" class="input" />
-    <div class="score">0</div>
-    <div class="time">9</div>
-    <button class="btn">게임시작</button>
+      <h1>기도문 외우기</h1>
+      <div class="word" id="wordDisplay">기도문을 타이핑하여 신앙심을 키워 봅시다!</div>
+      <input type="text" class="input" />
+      <div class="score">신앙심: 0</div>
+      <div class="time">남은 시간: 9</div>
+      <button class="btn">게임시작</button>
 
-    <!-- ✅ 여기도 포함 -->
-    <div class="complete-text" style="display: none;">🎉 모든 문장을 완성했습니다! 🎉</div>
-    <a href="stage2.html" class="next-stage-link" style="display: none;">다음 스테이지로 →</a>
+      <div class="complete-text" style="display: none;">신앙심이 깊어졌습니다! 구원에게 가까워졌어요.</div>
+      <a href="stage2.html" class="next-stage-link" style="display: none;">다음 스테이지로 →</a>
   </div>
 </div>
 
 <script>
-  const wordDisplay = document.getElementById('wordDisplay');
-  const input = document.querySelector('.input');
-  const title = document.querySelector('h1');
-  const scoreDisplay = document.querySelector('.score');
-  const timeDisplay = document.querySelector('.time');
-  const button = document.querySelector('.btn');
-  const main = document.getElementById("mainUI");
+const wordDisplay = document.getElementById('wordDisplay');
+const input = document.querySelector('.input');
+const title = document.querySelector('h1');
+const scoreDisplay = document.querySelector('.score');
+const timeDisplay = document.querySelector('.time');
+const button = document.querySelector('.btn');
+const main = document.getElementById("mainUI");
 
-  const wordList = ["한글은.", "나는.", "바람이.", "자바스크립", "프론트엔드.", "집중력을"];
-  let currentIndex = 0, score = 0, time = 9, isPlaying = false, interval;
+const wordList = [
+  "이름이 오직 하나로,", 
+  "거룩히 여김을 받으소서.", 
+  "자아는 죄악이었나이다.", 
+  "당신의 권능은 무한하며,", 
+  "당신의 영광은 눈이 멀 정도로,", 
+  "찬란하나이다."
+];
 
-  button.addEventListener('click', () => {
-    if (!isPlaying) startGame();
-  });
+let currentIndex = 0, score = 0, time = 9, isPlaying = false, interval;
 
-  function startGame() {
-    isPlaying = true;
-    score = 0;
-    time = 9;
-    currentIndex = 0;
-    scoreDisplay.textContent = score;
-    input.disabled = false;
-    input.value = "";
-    input.style.display = "block";
-    title.style.display = 'none';
-    button.textContent = "게임 중...";
-    wordDisplay.style.display = "block";
-    scoreDisplay.style.display = "block";
-    timeDisplay.style.display = "block";
-    button.style.display = "block";
-    document.querySelector('.complete-text').style.display = 'none';
-    document.querySelector('.next-stage-link').style.display = 'none';
-    showWord();
-    input.focus();
+button.addEventListener('click', () => {
+  if (!isPlaying) startGame();
+});
 
-    interval = setInterval(() => {
-      if (time > 0) {
-        time--;
-        timeDisplay.textContent = time;
-      } else {
-        gameOver();
-      }
-    }, 1000);
-  }
+function startGame() {
+  isPlaying = true;
+  score = 0;
+  time = 9;
+  currentIndex = 0;
+  scoreDisplay.textContent = "신앙심: " + score;
+  timeDisplay.textContent = "남은 시간: " + time;
+  input.disabled = false;
+  input.value = "";
+  input.style.display = "block";
+  title.style.display = 'none';
+  button.textContent = "게임 중...";
+  wordDisplay.style.display = "block";
+  scoreDisplay.style.display = "block";
+  timeDisplay.style.display = "block";
+  button.style.display = "block";
+  document.querySelector('.complete-text').style.display = 'none';
+  document.querySelector('.next-stage-link').style.display = 'none';
+  showWord();
+  input.focus();
 
-  function showWord() {
-    if (currentIndex >= wordList.length) return gameClear();
-    wordDisplay.textContent = wordList[currentIndex];
-    time = 9;
-    timeDisplay.textContent = time;
-  }
-
-  input.addEventListener('input', () => {
-    if (!isPlaying) return;
-    if (input.value.trim() === wordList[currentIndex]) {
-      score++;
-      scoreDisplay.textContent = score;
-      input.value = "";
-      currentIndex++;
-      showWord();
+  interval = setInterval(() => {
+    if (time > 0) {
+      time--;
+      timeDisplay.textContent = "남은 시간: " + time;
+    } else {
+      gameOver();
     }
-  });
+  }, 1000);
+}
 
-  function gameOver() {
-    isPlaying = false;
-    clearInterval(interval);
-    wordDisplay.textContent = "⛔ 시간 초과!";
-    input.disabled = true;
-    button.textContent = "게임 시작";
+function showWord() {
+  if (currentIndex >= wordList.length) return gameClear();
+  wordDisplay.textContent = wordList[currentIndex];
+  time = 9;
+  timeDisplay.textContent = "남은 시간: " + time;
+}
+
+input.addEventListener('input', () => {
+  if (!isPlaying) return;
+  if (input.value.trim() === wordList[currentIndex]) {
+    score++;
+    scoreDisplay.textContent = "신앙심: " + score;
+    input.value = "";
+    currentIndex++;
+    showWord();
   }
+});
 
-  function gameClear() {
-    isPlaying = false;
-    clearInterval(interval);
-    wordDisplay.style.display = 'none';
-    input.style.display = 'none';
-    scoreDisplay.style.display = 'none';
-    timeDisplay.style.display = 'none';
-    button.style.display = 'none';
-    document.querySelector('.complete-text').style.display = 'block';
-    document.querySelector('.next-stage-link').style.display = 'inline-block';
+function gameOver() {
+  isPlaying = false;
+  clearInterval(interval);
+  wordDisplay.textContent = "⛔ 시간 초과!";
+  timeDisplay.textContent = "남은 시간: 0";
+  input.disabled = true;
+  button.textContent = "게임 시작";
+}
 
-
-  }
+function gameClear() {
+  isPlaying = false;
+  clearInterval(interval);
+  wordDisplay.style.display = 'none';
+  input.style.display = 'none';
+  scoreDisplay.style.display = 'none';
+  timeDisplay.style.display = 'none';
+  button.style.display = 'none';
+  document.querySelector('.complete-text').style.display = 'block';
+  document.querySelector('.next-stage-link').style.display = 'inline-block';
+}
+  // 상단의 코드는 구글링하여 가져온 뒤 수정 및 추가하였습니다!!
+  // 출처: https://velog.io/@reasonz/2022.05.06-자바스크립트로-타이핑게임-만들기
 
 window.onload = () => {
-  // 일단 인트로만 보여줘야 하니까 mainUI 숨김
   document.getElementById("mainUI").style.display = "none";
   document.querySelector('.complete-text').style.display = 'none';
   document.querySelector('.next-stage-link').style.display = 'none';
 
-  // 3초 후에 인트로 사라지고 게임 UI 등장
   setTimeout(() => {
     document.getElementById("introOverlay").style.display = "none";
     document.getElementById("mainUI").style.display = "block";
   }, 3000);
 };
+
 </script>
 </body>
 </html>

@@ -1,69 +1,151 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #container {
+      width: 100vw;
+      height: 100vh;
+      background: black;
+    }
 
-#container {
-  width: 100vw;
-  height: 100vh;
-  background: black;
-}
+    #cluePopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      z-index: 2000;
+    }
 
-/* 단서 팝업 */
-#cluePopup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  z-index: 2000;
-}
+    #clueInventory {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60vw;
+      height: 60vh;
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid white;
+      padding: 1rem;
+      overflow: auto;
+      z-index: 3000;
+      color: white;
+    }
 
-/* 인벤토리 모달 */
-#clueInventory {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60vw;
-  height: 60vh;
-  background: rgba(0, 0, 0, 0.9);
-  border: 2px solid white;
-  padding: 1rem;
-  overflow: auto;
-  z-index: 3000;
-  color: white;
-}
+    #clueInventory h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
 
-#clueInventory h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
+    #clueImages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
 
-#clueImages {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
+    #clueImages img {
+      width: 150px;
+      border: 1px solid white;
+    }
 
-#clueImages img {
-  width: 150px;
-  border: 1px solid white;
-}
+    #clueInventory button {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      border: none;
+      padding: 0.3rem 1rem;
+      cursor: pointer;
+      font-size: 14px;
+    }
 
-#clueInventory button {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  background: white;
-  color: black;
-  font-weight: bold;
-  border: none;
-  padding: 0.3rem 1rem;
-  cursor: pointer;
-  font-size: 14px;
-}
+    #container {
+      width: 100vw;
+      height: 100vh;
+      background: black;
+    }
+
+    #cluePopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      z-index: 2000;
+    }
+
+    #fadeout {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease-in-out;
+      z-index: 9999;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      background: black;
+    }
+
+    #cluePopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      z-index: 2000;
+    }
+
+    #clueInventory {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60vw;
+      height: 60vh;
+      background: rgba(0, 0, 0, 0.85);
+      border: 3px solid white;
+      padding: 1rem;
+      color: white;
+      z-index: 3000;
+      overflow: auto;
+    }
+
+    #clueInventory img {
+      max-width: 100px;
+      margin: 10px;
+    }
+
+    #fadeout {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease-in-out;
+      z-index: 9999;
+    }

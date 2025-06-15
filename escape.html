@@ -1,211 +1,127 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>escape</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    #container {
-      width: 100vw;
-      height: 100vh;
-      background: black;
-    }
-
-    #cluePopup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      z-index: 2000;
-    }
-
-    #clueInventory {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60vw;
-      height: 60vh;
-      background: rgba(0, 0, 0, 0.85);
-      border: 2px solid white;
-      padding: 1rem;
-      overflow: auto;
-      z-index: 3000;
-      color: white;
-    }
-
-    #clueInventory h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    #clueImages {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    #clueImages img {
-      width: 150px;
-      border: 1px solid white;
-    }
-
-    #clueInventory button {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background: white;
-      color: black;
-      font-weight: bold;
-      border: none;
-      padding: 0.3rem 1rem;
-      cursor: pointer;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>escape</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="escape.css">
 </head>
 <body>
-  <audio id="bgm" src="assets/audio/bgm.mp3" autoplay loop></audio>
-  <div id="container"></div>
+<audio id="bgm" src="assets/audio/bgm.mp3" autoplay loop></audio>
+<div id="container"></div>
+<div id="fadeout"></div>
 
-  <!-- 단서 이미지 팝업 -->
-  <img id="cluePopup" />
+<img id="cluePopup" />
 
-  <!-- 단서 인벤토리 -->
-  <div id="clueInventory">
-    <h2>📜 주운 단서들</h2>
-    <div id="clueImages"></div>
-    <button onclick="document.getElementById('clueInventory').style.display='none'">닫기</button>
-  </div>
+<div id="clueInventory">
+  <h2>단서들</h2>
+  <div id="clueImages"></div>
+  <button onclick="document.getElementById('clueInventory').style.display='none'">x</button>
+</div>
 
-  <!-- Three.js & Panolens -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.105.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/panolens@0.12.0/build/panolens.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.105.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/panolens@0.12.0/build/panolens.min.js"></script>
 
-  <script>
-    let hasKey = false;
+<script>
+let hasKey = false;
 
-    const clues = {
-      clue1: false,
-      clue2: false,
-      clue3: false,
-      clue4: false
-    };
+const clues = {
+  clue1: false,
+  clue2: false,
+  clue3: false,
+  clue4: false
+};
 
-    const panorama = new PANOLENS.ImagePanorama('assets/images/roomre.png');
-    const viewer = new PANOLENS.Viewer({
-      container: document.querySelector("#container"),
-      autoRotate: true,
-      autoRotateSpeed: 0.3
-    });
-    viewer.add(panorama);
+const panorama = new PANOLENS.ImagePanorama('assets/images/roomre.png');
+const viewer = new PANOLENS.Viewer({
+  container: document.querySelector("#container"),
+  autoRotate: true,
+  autoRotateSpeed: 0.3
+});
 
-    function showCluePopup(clueKey) {
-      const popup = document.getElementById('cluePopup');
-      popup.src = `assets/images/${clueKey}.png`;
-      popup.style.display = 'block';
-      setTimeout(() => {
-        popup.style.display = 'none';
-      }, 2000);
+viewer.add(panorama);
+
+function showCluePopup(clueKey) {
+  const popup = document.getElementById('cluePopup');
+  popup.src = `assets/images/${clueKey}.png`;
+  popup.style.display = 'block';
+  setTimeout(() => {
+    popup.style.display = 'none';
+  }, 2000);
+}
+
+function createVisibleInfospot(x, y, z, clueKey) {
+  const spot = new PANOLENS.Infospot(80);
+  spot.position.set(x, y, z);
+  spot.addHoverText("단서 발견");
+  spot.addEventListener('click', () => {
+    if (!clues[clueKey]) {
+      clues[clueKey] = true;
+      showCluePopup(clueKey);
     }
+  });
+  panorama.add(spot);
+}
 
-    function createVisibleInfospot(x, y, z, clueKey) {
-      const spot = new PANOLENS.Infospot(80); // 크게!
-      spot.position.set(x, y, z);
-      spot.addHoverText("단서 발견");
+createVisibleInfospot(3000, -500, -2000, "clue1");
+createVisibleInfospot(-2500, 0, -1500, "clue2");
+createVisibleInfospot(500, -1000, 2000, "clue3");
+createVisibleInfospot(0, -2000, 1000, "clue4");
 
-      spot.addEventListener('click', () => {
-        if (!clues[clueKey]) {
-          clues[clueKey] = true;
-          showCluePopup(clueKey);
-        }
-      });
+// 유튜브 강좌 참고하였습니다!!
+// 출처: https://youtu.be/VQIqvwJLSZs?si=mvGYZ-RXhRoPqtN5
 
-      panorama.add(spot);
-    }
-
-    // 단서들 생성
-    createVisibleInfospot(3000, -500, -2000, "clue1");
-    createVisibleInfospot(-2500, 0, -1500, "clue2");
-    createVisibleInfospot(500, -1000, 2000, "clue3");
-    createVisibleInfospot(0, -2000, 1000, "clue4");
-
-    // 문 (정답 입력)
-    const doorSpot = new PANOLENS.Infospot(80);
-    doorSpot.position.set(0, -500, -3000);
-    doorSpot.addHoverText("문");
-
-    doorSpot.addEventListener('click', () => {
-      const allFound = Object.values(clues).every(v => v);
-      if (!allFound) {
-        alert("아직 모든 단서를 모으지 못했어요.");
-        return;
-      }
-
-      const input = prompt("네가 본 네 종이의 숫자를 말하라. (예: 7194)");
-      if (input === "7194") {
-        alert("당신은 진실을 보았습니다. 탈출합니다.");
-        hasKey = true;
-        // location.href = "ending.html";
-      } else {
-        alert("그 순서는 진실이 아닙니다.");
-      }
-    });
-    panorama.add(doorSpot);
-
-    // Tab키: 단서 인벤토리 열기, ESC: 닫기
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab') {
-        e.preventDefault();
-        const modal = document.getElementById('clueInventory');
-        const container = document.getElementById('clueImages');
-        container.innerHTML = '';
-
-        for (let i = 1; i <= 4; i++) {
-          const key = `clue${i}`;
-          if (clues[key]) {
-            const img = document.createElement('img');
-            img.src = `assets/images/${key}.png`;
-            container.appendChild(img);
-          }
-        }
-
-        modal.style.display = 'block';
-      }
-
-      if (e.key === 'Escape') {
-        document.getElementById('clueInventory').style.display = 'none';
-      }
-    });
-
-    window.onload = function () {
-  const name = localStorage.getItem("userName");
-  const started = localStorage.getItem("hasStarted");
-  const justEntered = localStorage.getItem("justEnteredStage3");
-
-  if (!name || started !== "true") {
-    location.href = "index.html"; // 필수 정보 없으면 다시 index
+const doorSpot = new PANOLENS.Infospot(80);
+doorSpot.position.set(0, -500, -3000);
+doorSpot.addHoverText("문");
+doorSpot.addEventListener('click', () => {
+  const allFound = Object.values(clues).every(v => v);
+  if (!allFound) {
+    alert("아직 모든 단서를 모으지 못했어요.");
     return;
   }
 
-  // 처음 들어온 거면 플래그만 지움 (메시지 안 띄움)
-  if (justEntered === "true") {
-    localStorage.removeItem("justEnteredStage3");
+  const input = prompt("비밀번호를 입력하시오.");
+  if (input === "7194") {
+    alert("당신은 진실을 보았습니다. 탈출 성공");
+    hasKey = true;
+
+    const fade = document.getElementById('fadeout');
+    fade.style.opacity = 1;
+
+    setTimeout(() => {
+      location.href = "ending.html";
+    }, 1000);
   } else {
-    // 두 번째 이상 진입 시 메시지 출력
-    alert(`${name}님, 어디 가세요? 도망치는 건가요?`);
+    alert("그 순서는 진실이 아닙니다.");
   }
-};
+});
+panorama.add(doorSpot);
 
+// 인벤토리 (단서 모아두기)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const modal = document.getElementById('clueInventory');
+    const container = document.getElementById('clueImages');
+    container.innerHTML = '';
+    for (let i = 1; i <= 4; i++) {
+      const key = `clue${i}`;
+      if (clues[key]) {
+        const img = document.createElement('img');
+        img.src = `assets/images/${key}.png`;
+        container.appendChild(img);
+      }
+    }
+  modal.style.display = 'block';
+}
 
+if (e.key === 'Escape') {
+  document.getElementById('clueInventory').style.display = 'none';
+  }
+});
+
+// 이름값 저장한 거 불러오기
 window.onload = function () {
   const name = localStorage.getItem("userName");
   const started = localStorage.getItem("hasStarted");
@@ -222,10 +138,6 @@ window.onload = function () {
     alert(`${name}님, 어디 가세요...? 도망치는 건가요?`);
   }
 };
-
-
-
-
   </script>
 </body>
 </html>
