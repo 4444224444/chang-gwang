@@ -103,6 +103,7 @@ video {
     background: transparent;
     border: 2px solid #ff6666;
     color: #ff9999;
+    font-family: 'Gowun Dodum';
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
