@@ -123,6 +123,16 @@ function typeSecondMeaning(newText) {
   }, 60);
 }
 
+window.onload = function () {
+  localStorage.setItem("sawEnding", "true");
+};
+
+function restartGame() {
+  localStorage.removeItem("sawEnding");            
+  localStorage.setItem("hasStarted", "true");     
+  localStorage.setItem("justEnteredStage3", "true");
+  location.href = "index.html";                 
+}
 </script>
 </body>
 </html>
