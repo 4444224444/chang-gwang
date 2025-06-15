@@ -48,7 +48,7 @@
     }
 
     #clueImages img {
-      width: 150px;
+      width: 500px;
       border: 1px solid white;
     }
 
@@ -65,77 +65,6 @@
       font-size: 14px;
     }
 
-    #container {
-      width: 100vw;
-      height: 100vh;
-      background: black;
-    }
-
-    #cluePopup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      z-index: 2000;
-    }
-
-    #fadeout {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease-in-out;
-      z-index: 9999;
-    }
-
-    body, html {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    #container {
-      width: 100vw;
-      height: 100vh;
-      background: black;
-    }
-
-    #cluePopup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      z-index: 2000;
-    }
-
-    #clueInventory {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60vw;
-      height: 60vh;
-      background: rgba(0, 0, 0, 0.85);
-      border: 3px solid white;
-      padding: 1rem;
-      color: white;
-      z-index: 3000;
-      overflow: auto;
-    }
-
-    #clueInventory img {
-      max-width: 100px;
-      margin: 10px;
-    }
 
     #fadeout {
       position: fixed;
