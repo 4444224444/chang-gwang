@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#wrap {
+  margin: 20px;
+  text-align: center;
+}
+.body {
+    background: #000000;
+
+}
+h1 {
+  margin-bottom: 20px;
+  color: #4e342e; /* 먹색 느낌의 진한 갈색 */
+  font-family: 'Gowun Dodum', serif;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.item {
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+  background: #fff8f0; /* 백자 느낌 나는 미색 */
+  text-align: center;
+  font-size: 12px;
+  border: 2px solid #a6745f; /* 동양풍 도자기 테두리 색상 */
+  cursor: grab;
+  border-radius: 6px;
+  font-family: 'Gowun Dodum', serif;
+}
+
+.item:hover {
+  background: #ffd8c2; /* 살구빛 포인트 */
+}
+#droppable {
+  flex: 1;
+  position: relative;
+  padding: 20px;
+  background: #f5e6dc; /* 닥종이 느낌 나는 배경색 */
+  border: 3px dashed #8c5e3c; /* 붉은 갈색 */
+  border-radius: 10px;
+}
+
+#slotBtn, #resetBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #aa4d2d; /* 벽돌색 계열 */
+  color: #fff8f0;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Gowun Dodum', serif;
+  cursor: pointer;
+
+}
+#slotBtn:hover, #resetBtn:hover {
+  background: #803520; /* 어두운 벽돌색 */
+}
+#slot {
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 3px solid #5e3b25;
+  color: #5e3b25;
+  background-color: #fff5ec;
+  font-family: 'Gowun Dodum', serif;
+}

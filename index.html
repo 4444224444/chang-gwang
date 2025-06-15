@@ -182,6 +182,17 @@
         alert("이름을 입력해주세요.");
       }
     }
+
+      window.onload = function () {
+    const hasStarted = localStorage.getItem("hasStarted");
+    const justEntered = localStorage.getItem("justEnteredStage3");
+
+    // escape.html로 이미 진입했던 경우 → 바로 이동
+    if (hasStarted === "true" && !justEntered) {
+      location.href = "escape.html";
+    }
+  };
+  
   </script>
 
 </body>

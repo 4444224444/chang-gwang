@@ -1,0 +1,269 @@
+html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+        background-image: url("assets/images/playBG.png");
+      background-size: cover;         
+      background-repeat: no-repeat;  
+      background-position: center; 
+      }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(26, 13, 13, 0.7); 
+      border: 3px double gold;
+      color: #ffe9c4;
+      padding: 2rem;
+       width: 50vw;    
+      height: 50vh; 
+      border-radius: 20px;
+      z-index: 1000;
+      box-shadow: 0 0 30px rgba(200, 0, 0, 0.7);
+      animation: appear 0.4s ease-out;
+      overflow: auto;
+    }
+
+    .modal.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 0.7;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    #modalText {
+      font-size: 1.1rem;
+      font-family: 'Gowun Dodum';
+      line-height: 1.6;
+      white-space: pre-line;
+      padding-top: 1rem;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: #ffcccc;
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Gowun Dodum';
+    }
+
+    .btn-close:hover {
+      color: #ff5b5b;
+    }
+
+    img {
+      position: absolute;
+      width: 150px;
+    }
+
+
+.BtnContainer {
+  position: absolute;
+  bottom: 5%; /* 화면 하단에서 살짝 위 */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row; /* 👉 가로 정렬 */
+  gap: 2rem; /* 버튼 사이 간격 */
+  z-index: 20;
+}
+
+.Btn {
+  padding: 1rem 2.5rem;
+  background-color: #8c3a2f;
+  color: #ffe8c2;
+  border: 3px double #d4af37;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-family: 'Gowun Dodum', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 238, 200, 0.3);
+  pointer-events: auto;
+}
+
+
+
+
+    .dark-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: brightness(0.08);
+  z-index: 5;
+  pointer-events: none;
+}
+
+
+    #highlight {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  backdrop-filter: brightness(10); 
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+} 
+
+
+
+
+#introOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: black;
+    color: #600000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .intro-text {
+    font-size: 8rem;
+    font-family: 'MOONWrite', serif;
+    animation: fadeInOut 3s ease-in-out forwards;
+  }
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+
+    #mainUI {
+      display: none;
+    }
+
+
+
+#suspectBtn {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  opacity: 0.1;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  color: #000000;
+  cursor: pointer;
+  font-family: 'Gowun Dodum';
+  transition: opacity 0.3s;
+  z-index: 30;
+}
+#suspectBtn:hover {
+  color: #ffffff;
+  opacity: 1;
+}
+
+#awakeningOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10000;
+  animation: glitch 0.8s infinite;
+}
+
+#awakeningText {
+  color: #ffe9c4;
+  font-family: 'Gowun Dodum', sans-serif;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  opacity: 0;
+  animation: fadeInText 2s ease-in-out forwards;
+}
+
+.choiceButtons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+#escapeBtn, #ignoreBtn {
+  font-size: 1.2rem;
+  background: none;
+  border: 2px solid #d4af37;
+  color: #ffe9c4;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#escapeBtn:hover, #ignoreBtn:hover {
+  background: #d4af37;
+  color: black;
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes glitch {
+  0% { filter: hue-rotate(0deg) blur(0px); }
+  25% { filter: hue-rotate(20deg) blur(1px); }
+  50% { filter: hue-rotate(-10deg) blur(2px); }
+  75% { filter: hue-rotate(15deg) blur(1px); }
+  100% { filter: hue-rotate(0deg) blur(0px); }
+}
+
+#message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffe9c4;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 999;
+  text-align: center;
+}
+
+#timeBarContainer {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 998;
+}
+
+#timeBar {
+  height: 100%;
+  width: 100%;
+  background-color: #e84d2d;
+  transition: width 0.4s ease;
+}
