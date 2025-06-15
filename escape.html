@@ -127,11 +127,6 @@ window.onload = function () {
   const justEntered = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
 
-  if (!name || started !== "true") {
-    location.href = "index.html";
-    return;
-  }
-
   if (justEntered === "true") {
     localStorage.removeItem("justEnteredEscape");
   } else if (sawEnding !== "true") {
