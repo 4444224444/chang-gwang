@@ -122,8 +122,7 @@ if (e.key === 'Escape') {
 });
 
 window.onload = function () {
-  const name = localStorage.getItem("userName");
-  const started = localStorage.getItem("hasStarted");
+  const name = localStorage.getItem("userName") || "사용자";
   const justEntered = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
 

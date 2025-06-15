@@ -94,6 +94,16 @@ function saveName() {
   }
 }
 
+window.onload = function () {
+  const hasStarted = localStorage.getItem("hasStarted");
+  const sawEnding = localStorage.getItem("sawEnding");
+  const name = localStorage.getItem("userName") || "사용자";
+
+  if (hasStarted === "true" && sawEnding !== "true") {
+    alert(`${name}님, 아직 탈출하지 못하셨습니다. 계속 진행합니다.`);
+    location.href = "escape.html";
+  }
+};
     
 </script>
 </body>
