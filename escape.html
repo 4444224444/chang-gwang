@@ -124,7 +124,7 @@ if (e.key === 'Escape') {
 window.onload = function () {
   const name = localStorage.getItem("userName");
   const started = localStorage.getItem("hasStarted");
-  const justEntered = localStorage.getItem("justEnteredStage3");
+  const justEntered = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
 
   if (!name || started !== "true") {
@@ -133,10 +133,9 @@ window.onload = function () {
   }
 
   if (justEntered === "true") {
-    localStorage.removeItem("justEnteredStage3");
+    localStorage.removeItem("justEnteredEscape");
   } else if (sawEnding !== "true") {
-    // 엔딩 안 보고 들어온 경우에만 경고 띄움
-    alert(`${name}님, 혹시 도망치려는 건 아니죠?`);
+    alert(`${name}님, 지금 도망가세요...?`);
   }
 };
   </script>

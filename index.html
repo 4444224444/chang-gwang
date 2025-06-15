@@ -83,6 +83,9 @@ function saveName() {
     localStorage.setItem("hasStarted", "true");
     localStorage.setItem("justEnteredStage3", "true");
 
+    localStorage.setItem("justEnteredEscape", "true");
+    localStorage.removeItem("sawEnding");
+
     document.getElementById("nameInput").style.display = "none";
     document.getElementById("nameSubmit").style.display = "none";
     document.getElementById("finalLink").style.display = "inline-block";
