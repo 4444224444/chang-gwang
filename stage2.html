@@ -1,0 +1,151 @@
+<body>
+  <div class="BtnContainer">
+    <button class="Btn" id="StartBtn">시작</button>
+    <button class="Btn" id="GameExplanationBtn">설명</button>
+  </div>
+
+  <div class="modal" id="modal">
+    <p id="modalText"></p>
+    <button class="btn-close" id="closeBtn">x</button>
+  </div>
+
+  <div id="message">안녕하떼욤</div>
+
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(26, 13, 13, 0.7); 
+      border: 3px double gold;
+      color: #ffe9c4;
+      padding: 2rem;
+       width: 50vw;    
+      height: 50vh; 
+      border-radius: 20px;
+      z-index: 1000;
+      box-shadow: 0 0 30px rgba(200, 0, 0, 0.7);
+      animation: appear 0.4s ease-out;
+      overflow: auto;
+    }
+
+    .modal.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 0.7;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    #modalText {
+      font-size: 1.1rem;
+      font-family: 'Gowun Dodum';
+      line-height: 1.6;
+      white-space: pre-line;
+      padding-top: 1rem;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: #ffcccc;
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Gowun Dodum';
+    }
+
+    .btn-close:hover {
+      color: #ff5b5b;
+    }
+
+    img {
+      position: absolute;
+      width: 80px;
+    }
+  </style>
+
+  <script>
+    let StartBtn = document.querySelector('#StartBtn');
+    let GameExplanationBtn = document.querySelector('#GameExplanationBtn');
+
+    let message = document.getElementById('message');
+    let modal = document.getElementById('modal');
+    let modalText = document.getElementById('modalText');
+    let closeBtn = document.getElementById('closeBtn');
+
+    let activeImages = 0;
+    let timer = null;
+
+    StartBtn.addEventListener('click', () => {
+      message.innerText = "";
+      clearTimeout(timer);
+      activeImages = 0;
+      let imgs = [];
+
+      for (let i = 0; i < 5; i++) {
+        let img = document.createElement('img');
+        img.src = 'assets/images/foot.png';
+
+        let x = Math.floor(Math.random() * (window.innerWidth - 100));
+        let y = Math.floor(Math.random() * (window.innerHeight - 100));
+
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+
+        let click = 0;
+        let opacity = 1;
+        activeImages++;
+
+        img.addEventListener('click', () => {
+          click++;
+          opacity -= 0.1;
+          img.style.opacity = opacity;
+
+          if (click >= 10) {
+            img.remove();
+            activeImages--;
+            if (activeImages === 0) {
+              clearTimeout(timer);
+              message.innerText = "성공메세지";
+            }
+          }
+        });
+
+        document.body.appendChild(img);
+        imgs.push(img);
+      }
+
+      timer = setTimeout(() => {
+        if (activeImages > 0) {
+          imgs.forEach(img => img.remove());
+          message.innerText = "다시신앙심쌓으라는메세지";
+          activeImages = 0;
+        }
+      }, 15000);
+    });
+
+    GameExplanationBtn.addEventListener('click', () => {
+      modal.classList.add('active');
+      modalText.textContent = '창광 게임 설명';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+  </script>
+</body>
+
+
