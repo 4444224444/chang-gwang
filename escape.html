@@ -122,14 +122,15 @@ if (e.key === 'Escape') {
 });
 
 window.onload = function () {
+
+  localStorage.setItem("lastPage", "escape");
+  localStorage.setItem("justEnteredEscape", "true");
+
   const name = localStorage.getItem("userName") || "사용자";
   const sawEnding = localStorage.getItem("sawEnding");
-
   if (sawEnding !== "true") {
     alert(`${name}님, 지금 도망가세요...?`);
   }
-
-  localStorage.setItem("justEnteredEscape", "true");
 };
 
 window.addEventListener('click', () => {

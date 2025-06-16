@@ -124,14 +124,16 @@ function typeSecondMeaning(newText) {
 }
 
 window.onload = function () {
-  localStorage.setItem("sawEnding", "true"); // ✅ 엔딩 본 기록
+  localStorage.setItem("sawEnding", "true");
+  localStorage.removeItem("justEnteredEscape");
+  localStorage.removeItem("hasStarted");
+  localStorage.setItem("lastPage", "ending");
 };
 
 function restartGame() {
-  localStorage.removeItem("sawEnding");            
-  localStorage.setItem("hasStarted", "true");     
-  localStorage.setItem("justEnteredStage3", "true");
-  location.href = "index.html";                 
+  localStorage.removeItem("sawEnding");           
+  localStorage.setItem("hasStarted", "true");    
+  location.href = "index.html";
 }
 
 

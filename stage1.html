@@ -141,6 +141,9 @@ window.addEventListener('click', () => {
   bgm.play();
 }, { once: true });
 
+window.onload = function () {
+  localStorage.setItem("lastPage", "stage1"); 
+};
 </script>
 </body>
 </html>

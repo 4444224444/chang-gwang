@@ -96,17 +96,20 @@ function saveName() {
 
 window.onload = function () {
   const hasStarted = localStorage.getItem("hasStarted");
-  const justEntered = localStorage.getItem("justEnteredEscape");
+  const lastPage = localStorage.getItem("lastPage");
+  const justEnteredEscape = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
   const name = localStorage.getItem("userName") || "사용자";
-
-  if (window.location.pathname.includes("index.html") &&
+  
+  if (lastPage === "escape" &&
       hasStarted === "true" &&
-      justEntered === "true" &&
+      justEnteredEscape === "true" &&
       sawEnding !== "true") {
-    alert(`${name}님, 어디 갔다 오시는 걸까요? 감시하고 계셨잖아요!`);
+    alert(`${name}님, 어디 갔다 오셨어요? 감시 중이었습니다.`);
     location.href = "escape.html";
   }
+
+  localStorage.setItem("lastPage", "index");
 };
 
     

@@ -195,6 +195,10 @@ document.getElementById('escapeBtn').addEventListener('click', () => {
   window.location.href = 'escape.html'; 
 });
 
+window.onload = function () {
+  localStorage.setItem("lastPage", "stage2"); 
+};
+
 window.addEventListener('click', () => {
   const bgm = document.getElementById('bgm');
   bgm.play();
