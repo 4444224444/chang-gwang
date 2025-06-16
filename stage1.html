@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="stage1.css">
 </head>
 <body>
-<audio id="bgm" src="assets/sounds/playBGM.mp3" loop></audio>
+<audio id="bgm" src=".assets/sounds/playBGM.mp3" loop></audio>
 
 <div id="introOverlay">
   <div class="intro-text">第一章</div>
@@ -125,7 +125,9 @@ function gameClear() {
   // 상단의 코드는 구글링하여 가져온 뒤 수정 및 추가하였습니다!!
   // 출처: https://velog.io/@reasonz/2022.05.06-자바스크립트로-타이핑게임-만들기
 
-window.onload = () => {
+window.onload = function () {
+  localStorage.setItem("lastPage", "stage1"); 
+
   document.getElementById("mainUI").style.display = "none";
   document.querySelector('.complete-text').style.display = 'none';
   document.querySelector('.next-stage-link').style.display = 'none';
@@ -140,8 +142,6 @@ window.addEventListener('click', () => {
   const bgm = document.getElementById('bgm');
   bgm.play();
 }, { once: true });
-
-
 </script>
 </body>
 </html>
