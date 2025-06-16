@@ -123,19 +123,12 @@ if (e.key === 'Escape') {
 
 window.onload = function () {
   const name = localStorage.getItem("userName") || "사용자";
-  const justEntered = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
 
-  // ✅ escape.html에 도달한 순간에만 flag 저장
-  localStorage.setItem("justEnteredEscape", "true");
-
-  if (justEntered === "true") {
-    localStorage.removeItem("justEnteredEscape");
-  } else if (sawEnding !== "true") {
+  if (sawEnding !== "true") {
     alert(`${name}님, 지금 도망가세요...?`);
   }
 };
-
 window.addEventListener('click', () => {
   const bgm = document.getElementById('bgm');
   bgm.play();
