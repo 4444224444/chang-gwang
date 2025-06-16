@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>stage2</title>
 <link rel="stylesheet" href="stage2.css">
 </head>
 <body>
@@ -60,9 +60,12 @@ let closeBtn = document.getElementById('closeBtn');
 let activeImages = 0;
 let timer = null;
 
-window.onload = () => {
-document.getElementById("mainUI").style.display = "none";
 
+window.onload = function () {
+
+  localStorage.setItem("lastPage", "stage2"); 
+
+  document.getElementById("mainUI").style.display = "none";
   setTimeout(() => {
     document.getElementById("introOverlay").style.display = "none";
     document.getElementById("mainUI").style.display = "block";
@@ -194,10 +197,6 @@ document.getElementById('escapeBtn').addEventListener('click', () => {
   alert("깨달았다면 도망치세요! 어서 빨리!");
   window.location.href = 'escape.html'; 
 });
-
-window.onload = function () {
-  localStorage.setItem("lastPage", "stage2"); 
-};
 
 window.addEventListener('click', () => {
   const bgm = document.getElementById('bgm');
