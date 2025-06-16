@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="stage2.css">
 </head>
 <body>
-<audio src="assets/sounds/playBGM.mp3" autoplay loop></audio>
+<audio src="assets/sounds/playBGM.mp3" autoplay loop muted></audio>
 
 <div class="dark-mask"></div>
 <div id="highlight"></div>
@@ -90,7 +90,6 @@ let totalTime = 15;
 let remainingTime = totalTime;
 timeBar.style.width = '100%';
 
-// 이미지 랜덤 배치하는 코드
 for (let i = 0; i < 5; i++) {
   let img = document.createElement('img');
   img.src = 'assets/images/foot.png';
@@ -117,7 +116,7 @@ for (let i = 0; i < 5; i++) {
       if (activeImages === 0) {
         clearInterval(interval);
         timeBar.style.width = '0%';
-        if (!blockMessage) message.innerText = "성공메세지";
+        if (!blockMessage) message.innerText = "성공!";
       }
     }
   });
@@ -146,7 +145,7 @@ interval = setInterval(() => {
 
 GameExplanationBtn.addEventListener('click', () => {
   modal.classList.add('active');
-  modalText.textContent = '창광 게임 설명';
+  modalText.textContent = '도망가는 반역자들의 발자국을 잡아 신앙심을 더욱 더 기르고 구원으로 다가갑시다!';
 });
 
 closeBtn.addEventListener('click', () => {
@@ -195,14 +194,6 @@ document.getElementById('escapeBtn').addEventListener('click', () => {
   alert("깨달았다면 도망치세요! 어서 빨리!");
   window.location.href = 'escape.html'; 
 });
-
-  window.addEventListener("click", function playBGMOnce() {
-    const bgm = document.getElementById("bgm");
-    if (bgm) {
-      bgm.play();
-      window.removeEventListener("click", playBGMOnce);
-    }
-  });
 </script>
 </body>
 </html>
