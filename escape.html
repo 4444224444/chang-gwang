@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="escape.css">
 </head>
 <body>
-<audio src="assets/sounds/escapeBGM.mp3" autoplay loop muted></audio>
+<audio id="bgm" src="assets/sounds/playBGM.mp3" loop></audio>
 <div id="container"></div>
 <div id="fadeout"></div>
 
@@ -126,12 +126,20 @@ window.onload = function () {
   const justEntered = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
 
+  // ✅ escape.html에 도달한 순간에만 flag 저장
+  localStorage.setItem("justEnteredEscape", "true");
+
   if (justEntered === "true") {
     localStorage.removeItem("justEnteredEscape");
   } else if (sawEnding !== "true") {
     alert(`${name}님, 지금 도망가세요...?`);
   }
 };
+
+window.addEventListener('click', () => {
+  const bgm = document.getElementById('bgm');
+  bgm.play();
+}, { once: true });
   </script>
 </body>
 </html>

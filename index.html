@@ -96,10 +96,12 @@ function saveName() {
 
 window.onload = function () {
   const hasStarted = localStorage.getItem("hasStarted");
+  const justEntered = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
   const name = localStorage.getItem("userName") || "사용자";
 
-  if (hasStarted === "true" && sawEnding !== "true") {
+  // 🚫 게임은 시작했지만 escape.html에는 도달하지 않았을 경우, 아무 일 없음
+  if (hasStarted === "true" && justEntered === "true" && sawEnding !== "true") {
     alert(`${name}님, 어디 갔다 오시는 걸까요? 감시하고 계셨잖아요!`);
     location.href = "escape.html";
   }
