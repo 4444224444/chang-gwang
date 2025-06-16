@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="start.css">
 </head>
 <body>
+<audio src="assets/sounds/startBGM.mp3" autoplay loop muted></audio>
 
 <div id="flashEffect"></div>
 
@@ -26,6 +27,11 @@ let GameExplanationBtn = document.querySelector('#GameExplanationBtn')
 let modal = document.querySelector('.modal')
 let modalText = document.querySelector('#modalText')
 let close = document.querySelector('.btn-close')
+
+window.onload = function () {
+  const bgm = document.querySelector("audio");
+  bgm.muted = false;
+};
 
 GameExplanationBtn.addEventListener('click', () => {
   modal.classList.add('active');
