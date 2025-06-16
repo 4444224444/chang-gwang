@@ -128,7 +128,10 @@ window.onload = function () {
   if (sawEnding !== "true") {
     alert(`${name}님, 지금 도망가세요...?`);
   }
+
+  localStorage.setItem("justEnteredEscape", "true");
 };
+
 window.addEventListener('click', () => {
   const bgm = document.getElementById('bgm');
   bgm.play();

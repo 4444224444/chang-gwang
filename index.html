@@ -96,14 +96,19 @@ function saveName() {
 
 window.onload = function () {
   const hasStarted = localStorage.getItem("hasStarted");
+  const justEntered = localStorage.getItem("justEnteredEscape");
   const sawEnding = localStorage.getItem("sawEnding");
   const name = localStorage.getItem("userName") || "사용자";
 
-  if (hasStarted === "true" && sawEnding !== "true") {
+  if (window.location.pathname.includes("index.html") &&
+      hasStarted === "true" &&
+      justEntered === "true" &&
+      sawEnding !== "true") {
     alert(`${name}님, 어디 갔다 오시는 걸까요? 감시하고 계셨잖아요!`);
     location.href = "escape.html";
   }
 };
+
     
 </script>
 </body>
